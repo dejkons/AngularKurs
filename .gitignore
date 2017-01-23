@@ -1,3 +1,5 @@
 bower_components
 .DS_store
 node_modules
+*.css
+*.min.js
