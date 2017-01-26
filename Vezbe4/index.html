@@ -39,6 +39,26 @@
               </div>
               <div class="col-md-6">
                      <h1>TABELA</h1>
+                     <table class="table">
+                          <tr>
+                                <td>Ime</td>
+                                <td>Fakultet</td>
+                                <td>Indeks</td>
+                                <td>Prosek</td>
+                                <td>Godina upisa</td>
+                                <td>Kontrole</td>
+                          </tr>
+                          <tr ng-repeat="std in studentCtrl.studenti">
+                                <td>{{std.ime}}</td>
+                                <td>{{std.fakultet}}</td>
+                                <td>{{std.index}}</td>
+                                <td>{{std.prosek}}</td>
+                                <td>{{std.godinaUpisa}}</td>
+                                <td>
+                                	<button ng-click="studentCtrl.obrisiStudenta($index)">Obrisi</button>
+                                </td>
+                          </tr>
+                     </table>
               </div>
        </div>
 </body>

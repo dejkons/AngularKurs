@@ -11,7 +11,15 @@ app.controller('StudentController', function($scope) {
         godinaUpisa: '' 
       }
 
+      self.studenti = [];
+      self.studentZaIspis = {};
+
       self.ispisiStudenta = function() {
-      	   console.log(self.student);
+      	   self.studentZaIspis = angular.copy(self.student);
+      	   self.studenti.push(self.studentZaIspis);
       }
+
+      self.obrisiStudenta = function(index) {
+           self.studenti.splice(index,1);
+      };
 });
