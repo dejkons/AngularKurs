@@ -1,0 +1,25 @@
+{
+  "name": "vezba4_domaci",
+  "description": "CRUD studenata",
+  "main": "index.js",
+  "authors": [
+    "Dejan Adamovic"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "studenti",
+    "crud"
+  ],
+  "homepage": "https://github.com/dejkons/AngularKurs",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.6.1",
+    "bootstrap": "^3.3.7"
+  }
+}
