@@ -3,14 +3,10 @@ app.controller('StudentController', ['$scope', '$log', 'studentskiServis', funct
 
 	var self = this;
 
-	self.student = {
-		ime: '',
-		prezime: '',
-		fakultet: '',
-		index: '',
-		prosek: '',
-		godinaUpisa: ''
-	};
+    // object binded to form
+	self.student = studentskiServis.initStudent();
+
+	// array of objects used for ng-repeat
 	self.studenti = studentskiServis.getStudenti();
 	self.studentZaIspis = {};
 
@@ -19,20 +15,21 @@ app.controller('StudentController', ['$scope', '$log', 'studentskiServis', funct
 
 		studentskiServis.addStudent(self.student);
 		self.studenti = studentskiServis.getStudenti();
-		studentskiServis._removeStudent();
+        self.student = studentskiServis.initStudent();
 	};
 
 	self.obrisiStudenta = function (index) {
 		$log.debug('StudentController.obrisiStudenta()');
 
-		self.studenti.splice(index, 1);
+		studentskiServis.removeStudent(index);
 	};
 
 	//DOMACI
 	self.editStudenta = function (index) {
 		$log.debug('StudentController.editStudenta()');
-
-		self.student = self.studenti[index];
+        self.student = self.studenti[index];
+        studentskiServis.editStudent(index, self.studenti[index]);
+		
 	};
 
 
