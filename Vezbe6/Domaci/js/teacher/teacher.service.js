@@ -1,128 +1,99 @@
-app.factory('studentskiServis', ['$log', function($log)
+app.factory('profesorskiServis', ['$log', function($log)
 {
 
-  var studenti = _getStudentiBaza();
+  var profesori = _getProfesoriBaza();
 
   return {
-    initStudent: initStudent,
-    resolveGender: resolveGender,
-    getStudenti: getStudenti,
-    addStudent: addStudent,
-    removeStudent: removeStudent,
-    updateStudent: updateStudent,
-    readStudent: readStudent
+    initTeacher: initTeacher,
+    getTeachers: getTeachers,
+    addTeacher: addTeacher,
+    removeTeacher: removeTeacher,
+    updateTeacher: updateTeacher,
+    readTeacher: readTeacher
   }
 
-  function addStudent (student) {
-    $log.debug('studentskiServis.addStudent()');
+  function addTeacher (teacher) {
+    $log.debug('profesorskiServis.addTeacher()');
 
-    studenti.push(student);
+    profesori.push(teacher);
   }
 
-  function getStudenti () {
-    $log.debug('studentskiServis.getStudenti()'); 
+  function getTeachers () {
+    $log.debug('profesorskiServis.getTeachers()'); 
     
-    return studenti;
+    return profesori;
   }
 
-  function removeStudent (index) {
-    $log.debug('studentskiServis.removeStudent()');
+  function removeTeacher (index) {
+    $log.debug('profesorskiServis.removeTeacher()');
 
-    studenti.splice(index, 1);
+    profesori.splice(index, 1);
   }
 
-  function readStudent (index) {
-    $log.debug('studentskiServis.readStudent()');
+  function readTeacher (index) {
+    $log.debug('profesorskiServis.readTeacher()');
 
-    return studenti[index];
+    return profesori[index];
   }
 
-  function updateStudent (student, index) {
-    $log.debug('studentskiServis.updateStudent()');
+  function updateTeacher (teacher, index) {
+    $log.debug('profesorskiServis.updateTeacher()');
 
-    studenti[index] = student;
+    profesori[index] = teacher;
   }
 
-  function _getStudentiBaza () {
-    var studenti = [
+  function _getProfesoriBaza () {
+    var profesori = [
       {
         name: 'Marko',
         lastName: 'Letic',
-        faculty: 'FTN',
-        index: 222,
-        avg: 11,
-        year: 2019,
-        gender: 'male'
+        subject: 'Math',
+        paycheck: 123123,
+        year: 2019
       },
       {
         name: 'Dejan',
         lastName: 'Adamovic',
-        faculty: 'FTN',
-        index: 222,
-        avg: 11,
-        year: 2019,
-        gender: 'male'
+        subject: 'English',
+        paycheck: 123123,
+        year: 2018
       },
       {
         name: 'Marko',
         lastName: 'Letic',
-        faculty: 'FTN',
-        index: 222,
-        avg: 11,
-        year: 2019,
-        gender: 'male'
+        subject: 'Math',
+        paycheck: 123123,
+        year: 2019
       },
       {
         name: 'Dejan',
         lastName: 'Adamovic',
-        faculty: 'FTN',
-        index: 222,
-        avg: 11,
-        year: 2019,
-        gender: 'male'
+        subject: 'English',
+        paycheck: 123123,
+        year: 2018
       },
       {
         name: 'Marko',
         lastName: 'Letic',
-        faculty: 'FTN',
-        index: 222,
-        avg: 11,
-        year: 2019,
-        gender: 'male'
+        subject: 'Math',
+        paycheck: 123123,
+        year: 2019
       }
     ];
 
-    return studenti;
+    return profesori;
   }
 
-  function initStudent() {
-     var student = {
+  function initTeacher() {
+     var teacher = {
           name: '',
           lastName: '',
-          faculty: '',
-          index: '',
-          avg: '',
-          year: '',
-          gender: 'male'
+          subject: '',
+          paycheck: '',
+          year: ''
      };
 
-     return student;
+     return teacher;
   }
-
-  function resolveGender(gender) {
-
-    var output = 'male'; 
-
-    switch (gender) {
-              case 'male':
-                         output = "Muski";
-                         break;
-              case 'female':
-                         output = "Zenski";
-                         break;           
-    }
-
-    return output;
-}
 
 }]);

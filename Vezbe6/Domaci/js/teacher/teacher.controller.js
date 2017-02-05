@@ -1,75 +1,58 @@
-app.controller('appController1', ['$log','studentskiServis', '$scope', function($log, studentskiServis, $scope) {
+app.controller('appController2', ['$log','profesorskiServis', '$scope', function($log, profesorskiServis, $scope) {
     var self = this;
 
-    self.student = studentskiServis.initStudent();     // init student object
-    self.studentForOutput = {};                        // student for output
-    self.students = studentskiServis.getStudenti();    // students array for ng-repeat in table
-    self.studentsList = ResolveGenderStudentList(self.students);
-    self.isEdit = false;                               // is edit mode now?  
-    self.editIndex = 0;                                // student array index which is edit - if edit mode
+    self.profesor = profesorskiServis.initTeacher();     // init profesor object
+    self.profesorForOutput = {};                         // profesor for output
+    self.profesors = profesorskiServis.getTeachers();    // profesors array for ng-repeat in table
+    self.isEdit = false;                                 // is edit mode now?  
+    self.editIndex = 0;                                  // profesor array index which is edit - if edit mode
 
-    self.SnimiStudenta = function() {
-          self.studentForOutput = angular.copy(self.student);
-          studentskiServis.addStudent(self.studentForOutput); 
-          self.students = studentskiServis.getStudenti();
-          self.studentsList = ResolveGenderStudentList(self.students);
-          self.student = studentskiServis.initStudent();
+    self.SnimiProfesora = function() {
+          self.profesorForOutput = angular.copy(self.profesor);
+          profesorskiServis.addTeacher(self.profesorForOutput); 
+          self.profesors = profesorskiServis.getTeachers();
+          self.profesor = profesorskiServis.initTeacher();
           
           self.isEdit = false;
 
     };
 
-    self.ObrisiStudenta = function(index) {
-          studentskiServis.removeStudent(index);
-          self.students = studentskiServis.getStudenti();
-          self.studentsList = ResolveGenderStudentList(self.students);
+    self.ObrisiProfesora = function(index) {
+          profesorskiServis.removeTeacher(index);
+          self.profesors = profesorskiServis.getTeachers();
 
           if ((self.isEdit == true) && (self.editIndex >= 0)) {
                if (self.editIndex == index) {
-               	     self.PrekidIzmeneStudenta();
+               	     self.PrekidIzmeneProfesora();
                }
           }
     };
 
-    self.UcitajStudenta = function(index) {
-       	  self.student = angular.copy(studentskiServis.readStudent(index));
-
-       	  switch (self.student.gender) {
-  	          	case 'Muski':
-  	          	           self.student.gender = "male";
-  	          	           break;
-  	          	case 'Zenski':
-  	          	           self.student.gender = "female";
-  	          	           break;           
-  	      }
+    self.UcitajProfesora = function(index) {
+          self.profesor = angular.copy(profesorskiServis.readTeacher(index));
 
   	      self.isEdit = true;
   	      self.editIndex = index;
     };
 
-    self.IzmeniStudenta = function() {
+    self.IzmeniProfesora = function() {
           if ((self.isEdit == true) && (self.editIndex >= 0)) {
-          	   var tempStudent =  angular.copy(self.student);
-               studentskiServis.updateStudent(tempStudent, self.editIndex);
-               self.students = studentskiServis.getStudenti(); 
-               self.studentsList = ResolveGenderStudentList(self.students);
+          	   var tempProfesor =  angular.copy(self.profesor);
+               profesorskiServis.updateTeacher(tempProfesor, self.editIndex);
+               self.profesors = profesorskiServis.getTeachers(); 
           }
     };
 
-    self.PrekidIzmeneStudenta = function() {
+    self.PrekidIzmeneProfesora = function() {
           self.isEdit = false;
 	        self.editIndex = 0;
-	        self.student = studentskiServis.initStudent();
+	        self.profesor = profesorskiServis.initTeacher();
     };
 
-    function ResolveGenderStudentList (students) {
-          var returnArray = [];
-          students.forEach(function(item, index) {
-               returnArray[index] = angular.copy(item);
-               returnArray[index].gender = studentskiServis.resolveGender(item.gender);
-          });
-
-          return returnArray;
-    };
+    self.OtvoriForm = function() {
+          self.isEdit = true;
+          self.editIndex = -1;
+          self.student = profesorskiServis.initTeacher();
+    }
 }]); 
 

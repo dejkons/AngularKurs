@@ -1,6 +1,6 @@
     <div id="appWrapper" class="container-fluid" ng-controller="appController as appCtrl">
     	 <div id="appLeftSide" class="col-md-6 col-sm-12 col-xs-12" ng-show="appCtrl.isEdit">
-    	      <h1>Unos podataka</h1>
+    	      <h1>Unos podataka studenata</h1>
               <span>
               	    <label for="name">Ime</label>
               	    <input type="text" id="name" value="" ng-model="appCtrl.student.name" /> 
@@ -37,7 +37,7 @@
               </span>
     	 </div>
     	 <div id="appRightSide" class="col-sm-12', 'col-xs-12'" ng-class="appCtrl.isEdit == true ? 'col-md-6' : 'col-md-12'">
-              <h1>Ispis podataka <span>(klikni na red za izmenu podataka)</span></h1>
+              <h1>Ispis podataka studenata <span>(klikni na red za izmenu podataka)</span></h1>
               <button name="revealForm" id="revealForm" ng-click="appCtrl.OtvoriForm()">Upisi novog studenta</button>
               <br />
               <table name="tblStudents" class="table">
