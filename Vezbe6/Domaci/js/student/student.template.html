@@ -1,0 +1,66 @@
+    <div id="appWrapper" class="container-fluid" ng-controller="appController as appCtrl">
+    	 <div id="appLeftSide" class="col-md-6 col-sm-12 col-xs-12">
+    	      <h1>Unos podataka</h1>
+              <span>
+              	    <label for="name">Ime</label>
+              	    <input type="text" id="name" value="" ng-model="appCtrl.student.name" /> 
+              </span>
+              <span>
+              	    <label for="lastName">Prezime</label>
+              	    <input type="text" id="lastName" value="" ng-model="appCtrl.student.lastName" /> 
+              </span>
+              <span>
+              	    <label for="faculty">Fakultet</label>
+              	    <input type="text" id="faculty" value="" ng-model="appCtrl.student.faculty" /> 
+              </span>
+              <span>
+              	    <label for="index">Indeks</label>
+              	    <input type="number" id="index" value="" ng-model="appCtrl.student.index" /> 
+              </span>
+              <span>
+              	    <label for="avg">Prosek</label>
+              	    <input type="number" id="avg" value="" ng-model="appCtrl.student.avg" /> 
+              </span>
+              <span>
+              	    <label for="year">Godina upisa</label>
+              	    <input type="number" id="year" value="" ng-model="appCtrl.student.year" /> 
+              </span>
+              <span>
+              	    <label>Pol</label>
+              	    <label class="inForm" for="genderMale">Muski</label><input type="radio" name="gender" id="genderMale" ng-model="appCtrl.student.gender" value="male" />
+              	    <label class="inForm" for="genderFemale">Zenski</label><input type="radio" name="gender" id="genderFemale" ng-model="appCtrl.student.gender" value="female" />  
+              </span>
+              <span>
+                    <button name="submitMainForm" id="submitMainForm" ng-click="appCtrl.SnimiStudenta()" ng-class="{display_none: appCtrl.isEdit != false}">Snimi studenta</button>
+                    <button name="submitMainForm2" id="submitMainForm2" ng-click="appCtrl.IzmeniStudenta()" ng-class="{display_none: appCtrl.isEdit != true}" ng-disabled="appCtrl.student.year < 2009">Izmeni studenta</button>
+                    <button name="submitMainForm3" id="submitMainForm3" ng-click="appCtrl.PrekidIzmeneStudenta()" ng-class="{display_none: appCtrl.isEdit != true}">Prekini izmenu</button>
+              </span>
+    	 </div>
+    	 <div id="appRightSide" class="col-md-6 col-sm-12 col-xs-12">
+              <h1>Ispis podataka <span>(klikni na red za izmenu podataka)</span></h1>
+              <table name="tblStudents" class="table">
+                    <tr>
+                    	<td>Ime</td>
+                    	<td>Prezime</td>
+                    	<td>Fakultet</td>
+                    	<td>Indeks</td>
+                    	<td>Prosek</td>
+                    	<td>Godina upisa</td>
+                    	<td>Pol</td>
+                    	<td>Akcija</td>
+                    </tr>
+                    <tr ng-repeat="student in appCtrl.studentsList track by $index" ng-click="appCtrl.UcitajStudenta($index)" class="dataRow" ng-class="{lowAvg: student.avg < 8}">
+                    	<td>{{student.name}}</td>
+                    	<td>{{student.lastName}}</td>
+                    	<td>{{student.faculty}}</td>
+                    	<td>{{student.index}}</td>
+                    	<td>{{student.avg}}</td>
+                    	<td>{{student.year}}</td>
+                    	<td>{{student.gender}}</td>
+                    	<td>
+                    		<button name="btnDelete" id="btnDelete" ng-click="appCtrl.ObrisiStudenta($index)" ng-disabled="student.year < 2009">Obrisi</button> 
+                    	</td>
+                    </tr>
+              </table>
+    	 </div>
+    </div>
