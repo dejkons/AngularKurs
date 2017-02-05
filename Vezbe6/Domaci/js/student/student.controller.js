@@ -6,7 +6,7 @@ app.controller('appController', ['$log','studentskiServis', '$scope', function($
     self.students = studentskiServis.getStudenti();    // students array for ng-repeat in table
     self.studentsList = ResolveGenderStudentList(self.students);
     self.isEdit = false;                               // is edit mode now?  
-    self.editIndex = 0;                                // student array index which is edit - if edit mode
+    self.editIndex = -1;                               // student array index which is edit - if edit mode
 
     self.SnimiStudenta = function() {
           self.studentForOutput = angular.copy(self.student);
@@ -61,6 +61,12 @@ app.controller('appController', ['$log','studentskiServis', '$scope', function($
 	        self.editIndex = 0;
 	        self.student = studentskiServis.initStudent();
     };
+
+    self.OtvoriForm = function() {
+          self.isEdit = true;
+          self.editIndex = -1;
+          self.student = studentskiServis.initStudent();
+    }
 
     function ResolveGenderStudentList (students) {
           var returnArray = [];

@@ -1,7 +1,7 @@
 var app = angular.module("myApp",['ui.router']);
 
 app.config(function ($logProvider) {
-	$logProvider.debugEnabled(false);
+	$logProvider.debugEnabled(true);
 });
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

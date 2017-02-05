@@ -1,5 +1,5 @@
     <div id="appWrapper" class="container-fluid" ng-controller="appController as appCtrl">
-    	 <div id="appLeftSide" class="col-md-6 col-sm-12 col-xs-12">
+    	 <div id="appLeftSide" class="col-md-6 col-sm-12 col-xs-12" ng-show="appCtrl.isEdit">
     	      <h1>Unos podataka</h1>
               <span>
               	    <label for="name">Ime</label>
@@ -31,13 +31,15 @@
               	    <label class="inForm" for="genderFemale">Zenski</label><input type="radio" name="gender" id="genderFemale" ng-model="appCtrl.student.gender" value="female" />  
               </span>
               <span>
-                    <button name="submitMainForm" id="submitMainForm" ng-click="appCtrl.SnimiStudenta()" ng-class="{display_none: appCtrl.isEdit != false}">Snimi studenta</button>
-                    <button name="submitMainForm2" id="submitMainForm2" ng-click="appCtrl.IzmeniStudenta()" ng-class="{display_none: appCtrl.isEdit != true}" ng-disabled="appCtrl.student.year < 2009">Izmeni studenta</button>
-                    <button name="submitMainForm3" id="submitMainForm3" ng-click="appCtrl.PrekidIzmeneStudenta()" ng-class="{display_none: appCtrl.isEdit != true}">Prekini izmenu</button>
+                    <button name="submitMainForm" id="submitMainForm" ng-click="appCtrl.SnimiStudenta()" ng-class="{display_none: appCtrl.isEdit == true && appCtrl.editIndex >= 0}">Snimi studenta</button>
+                    <button name="submitMainForm2" id="submitMainForm2" ng-click="appCtrl.IzmeniStudenta()" ng-class="{display_none: appCtrl.editIndex < 0}" ng-disabled="appCtrl.student.year < 2009">Izmeni studenta</button>
+                    <button name="submitMainForm3" id="submitMainForm3" ng-click="appCtrl.PrekidIzmeneStudenta()" ng-class="{display_none: appCtrl.editIndex < 0}">Prekini izmenu</button>
               </span>
     	 </div>
-    	 <div id="appRightSide" class="col-md-6 col-sm-12 col-xs-12">
+    	 <div id="appRightSide" class="col-sm-12', 'col-xs-12'" ng-class="appCtrl.isEdit == true ? 'col-md-6' : 'col-md-12'">
               <h1>Ispis podataka <span>(klikni na red za izmenu podataka)</span></h1>
+              <button name="revealForm" id="revealForm" ng-click="appCtrl.OtvoriForm()">Upisi novog studenta</button>
+              <br />
               <table name="tblStudents" class="table">
                     <tr>
                     	<td>Ime</td>
@@ -58,7 +60,7 @@
                     	<td>{{student.year}}</td>
                     	<td>{{student.gender}}</td>
                     	<td>
-                    		<button name="btnDelete" id="btnDelete" ng-click="appCtrl.ObrisiStudenta($index)" ng-disabled="student.year < 2009">Obrisi</button> 
+                    		<button name="btnDelete" id="btnDelete" ng-click="appCtrl.ObrisiStudenta($index); $event.stopPropagation();" ng-disabled="student.year < 2009">Obrisi</button> 
                     	</td>
                     </tr>
               </table>
