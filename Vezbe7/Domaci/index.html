@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>Vezbe 7 - Zadatak 1</title>
+		<!-- ADD CSS -->
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="styles/css/style.css"/>
+		<!-- ADD BOWER JS COMPONENTS -->
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<!-- ADD MAIN MODULE -->
+		<script src="app.js" type="text/javascript"></script>
+		<!-- ADD SERVICES -->
+		<script src="features/students/student.service.js" type="text/javascript"></script>
+		<script src="features/teachers/teacher.service.js" type="text/javascript"></script>
+		<!-- ADD CONTROLLERS -->
+		<script src="features/students/student.controller.js" type="text/javascript"></script>
+		<script src="features/teachers/teacher.controller.js" type="text/javascript"></script>
+	</head>
+	<body ng-app='MyApp'>
+
+		<!-- NAVIGATION -->
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" ui-sref="#">Uvod u Angular.js</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a ui-sref="students">Studenti</a></li>
+				<li><a ui-sref="teachers">Nastavnici</a></li>
+			</ul>
+		</nav>
+
+		<ui-view></ui-view>
+		
+	</body>
+</html>
