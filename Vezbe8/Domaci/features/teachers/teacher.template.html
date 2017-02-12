@@ -1,0 +1,57 @@
+<div class="col-md-12" ng-controller="TeacherController as teacherCtrl">
+	<!--TABLE -->
+	<div ng-class="teacherCtrl.teacher ? 'col-md-8' : 'col-md-12'">
+		<h1>TABELA</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<td>Ime</td>
+					<td>Prezime</td>
+					<td>Predmet</td>
+					<td>Datum rodjenja</td>
+					<td>Plata</td>
+				</tr>
+			</thead>
+			<tr ng-repeat="teacher in teacherCtrl.teachers" ng-class="{'selected': $index === teacherCtrl.index}" ng-click="teacherCtrl.addTeacherDataToEditForm($index)">
+				<td>{{teacher.firstname}}</td>
+				<td>{{teacher.lastname}}</td>
+				<td>{{teacher.course}}</td>
+				<td>{{teacher.dateOfBirth}}</td>
+				<td>{{teacher.salary}}</td>
+				<td>
+					<button ng-click="teacherCtrl.removeTeacher($index)">Obrisi</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!--INPUT FORM -->
+	<div ng-if="teacherCtrl.teacher" class="student-form col-md-4">
+		<button class="close-button" ng-click="teacherCtrl.closeDetailView()">X</button>
+		<h1>FORMA</h1>
+		<span>
+			<label>Ime: </label>
+			<input type="text" ng-model="teacherCtrl.teacher.firstname"/>
+		</span>
+		<span>
+			<label>Prezime: </label>
+			<input type="text" ng-model="teacherCtrl.teacher.lastname"/>
+		</span>
+		<span>
+			<label>Predmet: </label>
+			<input type="text" ng-model="teacherCtrl.teacher.course"/>
+		</span>
+		<span>
+			<label>Datum rodjenja: </label>
+			<input type="number" ng-model="teacherCtrl.teacher.dateOfBirth"/>
+		</span>
+		<span>
+			<label>Plata: </label>
+			<input type="number" ng-model="teacherCtrl.teacher.salary"/>
+		</span>
+		
+		<button class="btn btn-success" ng-click="teacherCtrl.addTeacher()">Dodaj nastavnika</button>
+		<button class="btn btn-default" ng-click="teacherCtrl.updateTeacher()">Izmeni nastavnika</button>
+	</div>
+
+</div>

@@ -1,0 +1,82 @@
+<div class="col-md-12" ng-controller="StudentController as studentCtrl">
+	<!--TABLE -->
+	<div ng-class="studentCtrl.student ? 'col-md-8' : 'col-md-12'">
+		<h1>TABELA</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<td>Ime</td>
+					<td>Prezime</td>
+					<td>Fakultet</td>
+					<td>Indeks</td>
+					<td>Prosek</td>
+					<td>Godina upisa</td>
+					<td>Datum rodjenja</td>
+					<td>Kontrole</td>
+				</tr>
+			</thead>
+			<tr ng-repeat="(id, std) in studentCtrl.students" ng-class="{'manji-prosek': std.prosek < 8, 'selected': id === studentCtrl.id}" ng-click="studentCtrl.addStudentDataToEditForm(id)">
+				<td>{{std.firstname}}</td>
+				<td>{{std.lastname}}</td>
+				<td>{{std.faculty}}</td>
+				<td>{{std.index}}</td>
+				<td>{{std.averageGrade}}</td>
+				<td>{{std.year}}</td>
+				<td>{{std.dateOfBirth | date:'fullDate' }}</td>
+				<td>
+					<button ng-click="studentCtrl.obrisiStudenta(id)">
+						<i class="fa fa-trash-o"></i>
+					</button>
+					<button ng-click="studentCtrl.addStudentDataToEditForm(id)">
+						<i class="fa fa-pencil"></i>
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!--INPUT FORM -->
+	<div ng-if="studentCtrl.student" class="student-form col-md-4">
+		<button class="close-button" ng-click="studentCtrl.closeDetailView()">
+			<i class="fa fa-times-circle"></i>
+		</button>
+		<h1>FORMA</h1>
+		<span>
+			<label>Ime: </label>
+			<input type="text" ng-model="studentCtrl.student.firstname"/>
+		</span>
+		<span>
+			<label>Prezime: </label>
+			<input type="text" ng-model="studentCtrl.student.lastname"/>
+		</span>
+		<span>
+			<label>Fakultet: </label>
+			<input type="text" ng-model="studentCtrl.student.faculty"/>
+		</span>
+		<span>
+			<label>Index: </label>
+			<input type="number" ng-model="studentCtrl.student.index"/>
+		</span>
+		<span>
+			<label>Prosek ocena: </label>
+			<input type="number" ng-model="studentCtrl.student.averageGrade"/>
+		</span>
+		<span>
+			<label>Godina upisa: </label>
+			<input type="number" ng-model="studentCtrl.student.year"/>
+		</span>
+		<span>
+			<label>Datum rodjenja: </label>
+			<p class="input-group">
+				<input type="text" class="form-control" uib-datepicker-popup ng-model="studentCtrl.student.dateOfBirth" is-open="studentCtrl.popup2.opened" datepicker-options="studentCtrl.dateOptions" ng-required="true" close-text="Close" />
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="studentCtrl.open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+				</span>
+			</p>
+		</span>
+		
+		<button class="btn btn-success" ng-click="studentCtrl.dodajStudenta()">Dodaj studenta</button>
+		<button class="btn btn-default" ng-disabled="{{studentCtrl.student.godinaUpisa < 2009}}"" ng-click="studentCtrl.updateStudent()">Izmeni studenta</button>
+	</div>
+
+</div>
