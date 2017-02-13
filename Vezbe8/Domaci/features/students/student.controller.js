@@ -9,8 +9,8 @@ app.controller('StudentController', ['$scope', '$log', 'studentDataService', '$f
 		self.students = students;
 	});
 	*/
-	var ref = firebase.database().ref().child("students");
-	self.students = $firebaseObject(ref);
+	//var ref = firebase.database().ref().child("students");
+	self.students = studentDataService.getStudentsWS();
 
 	self.studentZaIspis = {};
 
@@ -61,7 +61,7 @@ app.controller('StudentController', ['$scope', '$log', 'studentDataService', '$f
 	self.updateStudent = function () {
 		$log.debug('StudentController.editStudent()');
 		
-		studentDataService.updateStudent(self.student, self.id);
+		studentDataService.updateStudentWS(self.student, self.id);
 	};
 
 	self.addStudentDataToEditForm = function (id) {

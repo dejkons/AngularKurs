@@ -12,7 +12,9 @@ app.factory('studentDataService', ['$log', '$http', '$q', '$firebaseObject', 'st
 		removeStudent: removeStudent,
 		updateStudent: updateStudent,
 		removeStudentWS: removeStudentWS,
-		addStudentWS:addStudentWS
+		addStudentWS:addStudentWS,
+		updateStudentWS:updateStudentWS,
+		getStudentsWS:getStudentsWS
 	}
 
 	function addStudent (student) {
@@ -77,6 +79,12 @@ app.factory('studentDataService', ['$log', '$http', '$q', '$firebaseObject', 'st
 		});
 	}
 
+	function updateStudentWS (student, id) {
+		$log.debug('studentDataService.updateStudentWS()');
+
+        var studentRef = ref.child(id).set(student);
+	}
+
 	function removeStudentWS (id) {
 		$log.debug('studentDataService.removeStudentWS()');
 
@@ -88,6 +96,11 @@ app.factory('studentDataService', ['$log', '$http', '$q', '$firebaseObject', 'st
 		}, function(error) {
 			console.log("Error:", error);
 		});
+	}
+
+	function getStudentsWS () {
+		var students = $firebaseObject(ref);
+		return students;
 	}
 
 }]);
